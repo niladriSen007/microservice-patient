@@ -1,8 +1,5 @@
 package com.niladri.microservice_patient.mapper;
 
-import java.time.LocalDate;
-
-import com.niladri.microservice_patient.DTOs.PatientRequestDto;
 import com.niladri.microservice_patient.DTOs.PatientResponseDto;
 import com.niladri.microservice_patient.model.Patient;
 

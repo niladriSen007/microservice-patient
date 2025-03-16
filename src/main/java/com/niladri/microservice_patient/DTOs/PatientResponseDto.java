@@ -1,7 +1,5 @@
 package com.niladri.microservice_patient.DTOs;
 
-import java.util.UUID;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
