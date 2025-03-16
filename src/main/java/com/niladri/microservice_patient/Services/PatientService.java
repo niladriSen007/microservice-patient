@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.niladri.microservice_patient.DTOs.PagedResponseDto;
 import com.niladri.microservice_patient.DTOs.PatientResponseDto;
 import com.niladri.microservice_patient.model.Patient;
 
@@ -26,6 +27,13 @@ public interface PatientService {
      * @return Page of patients
      */
     Page<PatientResponseDto> findAll(Pageable pageable);
+    
+    /**
+     * Find all patients with pagination and sorting metadata
+     * @param pageable Pagination and sorting parameters
+     * @return PagedResponseDto containing page of patients and sorting metadata
+     */
+    PagedResponseDto<PatientResponseDto> findAllWithSortMetadata(Pageable pageable);
     
     /**
      * Find patient by ID

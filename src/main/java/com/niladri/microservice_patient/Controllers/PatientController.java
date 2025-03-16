@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.niladri.microservice_patient.DTOs.PagedResponseDto;
 import com.niladri.microservice_patient.DTOs.PatientResponseDto;
 import com.niladri.microservice_patient.Services.PatientService;
 import com.niladri.microservice_patient.model.Patient;
@@ -64,6 +65,29 @@ public class PatientController {
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, sort));
         
         return ResponseEntity.ok(patientService.findAll(pageable));
+    }
+    
+    /**
+     * Get all patients with pagination, sorting, and sorting metadata
+     * @param page Page number (0-based)
+     * @param size Page size
+     * @param sort Sort field
+     * @param direction Sort direction (ASC or DESC)
+     * @return PagedResponseDto containing page of patients and sorting metadata
+     */
+    @GetMapping("/paged-with-metadata")
+    public ResponseEntity<PagedResponseDto<PatientResponseDto>> getAllPatientsPagedWithMetadata(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "name") String sort,
+            @RequestParam(defaultValue = "ASC") String direction) {
+        
+        Sort.Direction sortDirection = direction.equalsIgnoreCase("DESC") ? 
+                Sort.Direction.DESC : Sort.Direction.ASC;
+        
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, sort));
+        
+        return ResponseEntity.ok(patientService.findAllWithSortMetadata(pageable));
     }
     
     /**
